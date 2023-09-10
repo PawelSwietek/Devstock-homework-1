@@ -49,14 +49,14 @@ function ReplyInput({ id, submitReplay }) {
   );
 }
 
-function Replies({ replies, depth = 4, addInput, replyBtnClickHandler, submitReplay }) {
+function Replies({ replies, depth = 1, addInput, replyBtnClickHandler, submitReplay }) {
   if (!replies || replies.length === 0) return null;
 
   return (
     <>
       {replies.map((item, index) => (
         <React.Fragment key={index}>
-          <div className={`ml-${depth} text-sm text-slate-600 `}>
+          <div style={{ marginLeft: `${depth * 10}px` }} className={` text-sm text-slate-600 `}>
             <span className="font-semibold just">&uarr;{`${item.id} ${item.author}`}</span> {item.content}
             <button
               onClick={() => replyBtnClickHandler(item.id)}
@@ -69,7 +69,7 @@ function Replies({ replies, depth = 4, addInput, replyBtnClickHandler, submitRep
           {item.replies && item.replies.length > 0 && (
             <Replies
               replies={item.replies}
-              depth={depth + 2}
+              depth={depth + 1}
               addInput={addInput}
               replyBtnClickHandler={replyBtnClickHandler}
               submitReplay={submitReplay}
